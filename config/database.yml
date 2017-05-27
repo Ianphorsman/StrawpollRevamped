@@ -25,17 +25,17 @@ default: &default
 development:
   <<: *default
   database: StrawpollRevamped_development
-  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME' %>
-  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD' %>
+  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME'] %>
+  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD'] %>
 
 test:
   <<: *default
   database: StrawpollRevamped_test
-  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME' %>
-  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD' %>
+  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME'] %>
+  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD'] %>
 
 production:
   <<: *default
   database: StrawpollRevamped_production
-  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME' %>
-  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD' %>
+  username: <%= ENV['STRAWPOLL_DATABASE_USERNAME'] %>
+  password: <%= ENV['STRAWPOLL_DATABASE_PASSWORD'] %>

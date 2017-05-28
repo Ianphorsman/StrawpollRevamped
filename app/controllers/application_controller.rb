@@ -100,8 +100,6 @@ class ApplicationController < ActionController::Base
   end
   helper_method :update_react_params_with_poll_data
 
-  def update_react_params_with_
-
   private
 
   def authenticate_or_create_user

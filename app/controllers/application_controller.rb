@@ -35,6 +35,71 @@ class ApplicationController < ActionController::Base
   end
   helper_method :share_link
 
+  def default_react_params
+    @react_params = {
+      :latestPollId           => Poll.last.id,
+      :pollContext            => 'newPoll',
+      :pollId                 => 1,
+      :full_access_to_stream  => false,
+      :pollData              => {
+          :pollId => 0
+      },
+      :voteCount              => 0,
+      :shareLink              => "/home/show/0",
+      :userPollVotes          => {}
+    }
+  end
+  helper_method :default_react_params
+
+  def update_react_params_with_user_data
+    user = authenticate_or_create_user
+    if user.nil?
+      @react_params[:userPolls] = []
+      @react_params[:userVotes] = []
+      @react_params[:userId] = user.id
+    else
+      @react_params[:userVotes] = user.votes
+      @react_params[:userId] = user.id
+      if user.votes.count > 0
+        @react_params[:userPolls] = user.polls.map do |poll|
+          {
+              :id => poll.id,
+              :question => poll.name,
+              :voteCount => poll.vote_count
+          }
+        end.sort_by { |poll| -poll[:vote_count] }.first(10)
+      else
+        @react_params[:userPolls] = []
+      end
+    end
+    yield
+  end
+  helper_method :update_react_params_with_user_data
+
+  def update_react_params_with_popular_polls
+    if Poll.all.count > 0
+      @react_params[:popularPolls] = Poll.all.sort_by { |poll| poll.vote_count }.last(10).map do |poll|
+        {
+            :id => poll.id,
+            :question => poll.name,
+            :voteCount => poll.vote_count
+        }
+      end
+    end
+  end
+  helper_method :update_react_params_with_popular_polls
+
+  def update_react_params_with_poll_data user, poll
+    if user_has_voted?
+      @react_params[:pollData] = poll.poll_data
+      @react_params[:voteCount] = poll.vote_count
+    else
+      @react_params[:pollData] = poll.poll_data_by_user user
+      @react_params[:voteCount] = poll.vote_count_of_user user
+    end
+  end
+  helper_method :update_react_params_with_poll_data
+
   private
 
   def authenticate_or_create_user

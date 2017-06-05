@@ -36,8 +36,9 @@ class ApplicationController < ActionController::Base
   helper_method :share_link
 
   def default_react_params
+    if Poll.all.count > 0 then latest_poll_id = Poll.last.id else latest_poll_id = 0 end
     @react_params = {
-      :latestPollId           => Poll.last.id,
+      :latestPollId           => latest_poll_id,
       :pollContext            => 'newPoll',
       :pollId                 => 1,
       :full_access_to_stream  => false,
@@ -51,7 +52,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :default_react_params
 
-  def update_react_params_with_user_data
+  def update_react_params_with_user_data &block
     user = authenticate_or_create_user
     if user.nil?
       @react_params[:userPolls] = []
@@ -72,7 +73,7 @@ class ApplicationController < ActionController::Base
         @react_params[:userPolls] = []
       end
     end
-    yield
+    yield if block_given?
   end
   helper_method :update_react_params_with_user_data
 
@@ -103,8 +104,8 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_or_create_user
-    ip_addr = require.remote_ip
-    device = require.user_agent
+    ip_addr = request.remote_ip
+    device = request.user_agent
 
     hashable_user_string = "#{ip_addr}_#{device}"
 

@@ -18,4 +18,5 @@
 
 /config/local_env.yml
 
-/node_modules
+/node_modulesnode_modules/
+package.json

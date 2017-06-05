@@ -18,5 +18,6 @@ module StrawpollRevamped
       end if File.exists? env_file
     end
     config.react.addons = true
+
   end
 end

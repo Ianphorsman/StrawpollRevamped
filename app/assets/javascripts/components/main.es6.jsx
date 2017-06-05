@@ -1,7 +1,22 @@
 class Main extends React.Component {
-  render () {
-    return <div />;
-  }
-}
 
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            ...props,
+        }
+    }
+
+
+  render () {
+
+    return(
+        <div>
+            <p>Hello World</p>
+        </div>
+    )
+  }
+
+}
 

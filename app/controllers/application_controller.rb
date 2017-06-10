@@ -47,7 +47,17 @@ class ApplicationController < ActionController::Base
       },
       :voteCount              => 0,
       :shareLink              => "/home/show/0",
-      :userPollVotes          => {}
+      :userPollVotes          => {},
+      :question               => "",
+      :options                => {
+          0 => '', 1 => '', 2 => '', 3 => ''
+      },
+      :pollExpiresIn          => "",
+      :pollExpiryUnit         => "",
+      :numVotes               => "",
+      :votesRequired          => "",
+      :duplicateVotesAllowed  => false,
+      :totalVotes             => ""
     }
   end
   helper_method :default_react_params

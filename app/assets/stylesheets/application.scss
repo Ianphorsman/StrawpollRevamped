@@ -2,3 +2,26 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-top: 50px;
+  width: 100%;
+  -webkit-font-smoothing: antialiased;
+}
+
+.form-group {
+  margin: 0 !important;
+  width: 100%;
+}
+
+.form-horizontal {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+

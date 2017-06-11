@@ -147,7 +147,7 @@ class NewPoll extends React.Component {
     addPollExpiry() {
         return (
             <div className="form-group">
-                <label className="right col-xs-6 no-pad control-label">Close poll in </label>
+                <label className="col-xs-6 no-pad">Close poll in </label>
                 <div className="col-xs-4 no-pad">
                     <input
                         className={this.presentPollExpiresIn()}
@@ -175,7 +175,7 @@ class NewPoll extends React.Component {
     addVotesPerPerson() {
         return (
             <div className="form-group">
-                <label className="control-label no-pad col-xs-6">Votes allowed per person: </label>
+                <label className="no-pad col-xs-6">Votes allowed per person: </label>
                 <div className="col-xs-4 no-pad">
                     <input
                         className={this.presentNumVotesAllowed()}
@@ -192,7 +192,7 @@ class NewPoll extends React.Component {
     addDuplicateVotesAllowed() {
         return (
             <div className="form-group">
-                <label className="control-label col-xs-6 no-pad">Duplicate Votes Allowed: </label>
+                <label className="col-xs-6 no-pad">Duplicate Votes Allowed: </label>
                 <div className="col-xs-2 col-xs-offset-4 no-pad">
                     <input
                         onChange={this.props.updateFormField.bind(null, 'duplicateVotesAllowed')}
@@ -207,7 +207,7 @@ class NewPoll extends React.Component {
     addFormSubmit() {
         return (
             <div className="form-group">
-                <div role="group" className="btn-group btn-group-justified">
+                <div>
                     <a
                         type="button"
                         className={this.createPollEnabled()}

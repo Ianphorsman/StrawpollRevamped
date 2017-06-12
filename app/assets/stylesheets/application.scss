@@ -1,6 +1,4 @@
 @import 'colors';
-@import 'bootstrap-sprockets';
-@import 'bootstrap';
 
 * {
   margin: 0;
@@ -8,42 +6,39 @@
 }
 
 body {
-  padding-top: 60px;
+  padding-top: 5rem;
   width: 100%;
   -webkit-font-smoothing: antialiased;
+  font-family: 'Patrick Hand SC', cursive;
 }
-
-.form-group {
-  margin: 0 !important;
-  width: 100%;
+select, button, a {
+  font-family: 'Patrick Hand SC', cursive;
 }
-
 input {
-  border-radius: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-}
+  border: none;
+  font-family: 'Patrick Hand SC', cursive;
 
-
-.form-horizontal {
-  text-align: center;
-  width: 100%;
-  margin: 0;
-
-  label {
-    text-align: left;
+  &:focus {
+    border: none;
+    outline: none;
+    font-weight: bold;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    transition: padding .2s;
+  }
+  &[type="text"] {
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
   }
 }
 
-.create-poll {
-  background-color: lighten($amber, 10%);
-  color: invert($amber);
-  border-radius: 0;
-  &:hover {
-    background-color: $amber;
-  }
+h1 {
+  color: $amber;
 }
 
-
-
-
+header {
+  background-color: #f8f8f8;
+  .navbar {
+    height: 4rem;
+  }
+}

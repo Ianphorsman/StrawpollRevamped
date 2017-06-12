@@ -126,20 +126,27 @@ class Main extends React.Component {
         }
     }
 
+    updateDuplicateVotesAllowed(value) {
+        this.setState({
+            duplicateVotesAllowed: value
+        })
+    }
+
   render () {
 
     return(
         <div>
             <MainMenu
-                changeContext={this.changeContext.bind(this)}
                 getPoll={this.getPoll.bind(this)}
-                userPolls={[]}
-                popularPolls={[]}>
+                userPolls={this.state.userPolls}
+                popularPolls={this.state.popularPolls}
+                changeContext={this.changeContext.bind(this)}>
             </MainMenu>
            <NewPoll
                 changeContext={this.changeContext.bind(this)}
                 updateFormField={this.updateFormField.bind(this)}
                 updateSelectionField={this.updateSelectionField.bind(this)}
+                updateDuplicateVotesAllowed={this.updateDuplicateVotesAllowed.bind(this)}
                 increaseOptionCount={this.increaseOptionCount.bind(this)}
                 createPoll={this.createPoll.bind(this)}
                 question={this.state.question}

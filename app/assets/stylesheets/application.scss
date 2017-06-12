@@ -5,30 +5,158 @@
   padding: 0;
 }
 
+.text-muted {
+  font-size: 0.9rem;
+  margin-left: 2vw;
+  &.smiles {
+    color: $river !important;
+  }
+}
+
 body {
   padding-top: 5rem;
   width: 100%;
   -webkit-font-smoothing: antialiased;
   font-family: 'Patrick Hand SC', cursive;
+  background-color: #f8f8f8;
 }
 select, button, a {
   font-family: 'Patrick Hand SC', cursive;
+  border-radius: 0 !important;
+}
+select {
+  background-color: mix(white, #f8f8f8) !important;
+  border: none;
+  border-left: solid 2px #f8f8f8;
+  color: $river;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-align-last: center;
+  cursor: pointer;
+  &:focus {
+    outline: none;
+    font-weight: bold;
+    text-shadow: 0 0 3px lighten($amber, 10%);
+  }
+}
+.col.adv-option {
+  text-align: center;
+}
+.select {
+  position: relative;
+  margin-bottom: 0.5rem;
+  &:after {
+    content: '\f0dc';
+    position: absolute;
+    font-family: FontAwesome;
+    right: 0;
+    bottom: 0.5rem;
+    color: $river;
+    //border: solid 1px black;
+  }
+  input {
+    text-align: center;
+  }
+
+}
+.adv-option {
+  margin-bottom: 0.5rem;
+  input {
+    text-align: center;
+  }
+}
+.separator {
+  border-bottom: solid 1px transparentize($amber, 0.5);
+  margin-top: 1vh;
+  margin-bottom: 1vh;
+  z-index: 2;
+  position: relative;
+}
+button {
+  color: $amber;
+  background-color: $river;
+  border: none !important;
+  cursor: pointer;
+  &.clicked {
+    font-weight: bold;
+    text-shadow: 0 0 3px lighten($amber, 10%);
+    font-size: 1.25rem;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+#second-choice {
+  border-left: solid 2px #f8f8f8 !important;
+}
+.create-poll {
+  margin-top: 1vh;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 input {
   border: none;
   font-family: 'Patrick Hand SC', cursive;
-
+  border-radius: 0;
   &:focus {
     border: none;
     outline: none;
     font-weight: bold;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    transition: padding .2s;
   }
-  &[type="text"] {
-    padding-top: 0.5rem;
+  &[type="text"].option {
     font-size: 1.5rem;
+    margin-bottom: 2vh;
+    transition: margin .2s;
+    background-color: mix(white, #f8f8f8);
+    box-shadow: inset 0 0 5px 1px #f8f8f8;
+    &.question.filled {
+      &:focus {
+        background-color: mix(white, #f8f8f8);
+        box-shadow: inset 0 0 5px 1px #f8f8f8;
+        font-style: normal;
+      }
+    }
+    &:focus {
+      margin-bottom: 3vh;
+      transition: margin .2s;
+      &.filled, &.error {
+        background-color: mix(white, #f8f8f8);
+        box-shadow: inset 0 0 5px 1px #f8f8f8;
+        margin-bottom: 3vh;
+      }
+    }
+    &.filled {
+      background-color: $river;
+      margin-bottom: 0.5vh;
+      transition: margin .2s;
+      box-shadow: none;
+      &.question {
+        margin-bottom: 2vh;
+        background-color: lighten($amber, 5%);
+        font-style: italic;
+      }
+    }
+    &.error {
+      background-color: $pomegranate;
+      margin-bottom: 1vh;
+      transition: margin .2s;
+      box-shadow: none;
+      &.question {
+        margin-bottom: 2vh;
+      }
+    }
+  }
+  &.poll-option {
+    background-color: mix(white, #f8f8f8);
+    box-shadow: inset 0 0 5px 1px #f8f8f8;
+    &.filled {
+      color: $river;
+      &:focus {
+        color: inherit;
+      }
+    }
   }
 }
 
@@ -38,6 +166,7 @@ h1 {
 
 header {
   background-color: #f8f8f8;
+  border-bottom: solid 1px transparentize($amber, 0.5);
   .navbar {
     height: 4rem;
   }

@@ -16,7 +16,7 @@ class MainMenu extends React.Component {
       return(
           <header className="container-fluid fixed-top">
               <div className="navbar container">
-                <h1>Strawpoll</h1>
+                <h1>Strawpoll <span className="text-muted">Create and share here</span><span className="text-muted smiles">:)</span></h1>
               </div>
           </header>
       )

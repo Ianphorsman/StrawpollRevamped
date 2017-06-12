@@ -83,9 +83,9 @@ class NewPoll extends React.Component {
 
     presentQuestion() {
         if (this.validQuestion()) {
-            return "col filled"
+            return "col filled option question"
         } else {
-            return "col"
+            return "col option"
         }
     }
 
@@ -94,7 +94,7 @@ class NewPoll extends React.Component {
         if (this.validPollExpiresIn()) {
             return "col filled poll-option"
         } else {
-            return "col"
+            return "col poll-option"
         }
     }
 
@@ -102,7 +102,7 @@ class NewPoll extends React.Component {
         if (this.validNumVotesAllowed()) {
             return "col filled poll-option"
         } else {
-            return "col"
+            return "col poll-option"
         }
     }
 
@@ -146,7 +146,7 @@ class NewPoll extends React.Component {
                     onChange={this.props.updateSelectionField.bind(null, option[0])}
                     onFocus={this.props.increaseOptionCount.bind(null)}
                     className={this.presentOption(option)}
-                    placeholder="Enter poll option"
+                    placeholder="Answer"
                     tabIndex={parseInt(option)+2}
                 />
             </div>
@@ -155,9 +155,8 @@ class NewPoll extends React.Component {
 
     addPollExpiry() {
         return (
-            <div className="row">
-                <label className="col">Close poll in </label>
-                <div className="col"></div>
+            <div className="row select">
+                <label className="col-6">Close poll in </label>
                 <input
                     className={this.presentPollExpiresIn()}
                     onChange={this.props.updateFormField.bind(null, 'pollExpiresIn')}
@@ -175,6 +174,7 @@ class NewPoll extends React.Component {
                     <option value="hours">hours</option>
                     <option value="days">days</option>
                     <option value="never">never</option>
+                    <i className="fa fa-angle-down"></i>
                 </select>
             </div>
         )
@@ -182,8 +182,8 @@ class NewPoll extends React.Component {
 
     addVotesPerPerson() {
         return (
-            <div className="row">
-                <label className="col">Votes allowed per person: </label>
+            <div className="row adv-option">
+                <label className="col-6">Votes allowed per person: </label>
                 <input
                     className={this.presentNumVotesAllowed()}
                     onChange={this.props.updateFormField.bind(null, 'numVotes')}
@@ -192,6 +192,7 @@ class NewPoll extends React.Component {
                     placeholder="1"
                     tabIndex={Object.keys(this.props.options).length+5}
                 />
+                <div className="col"></div>
             </div>
         )
     }
@@ -199,8 +200,7 @@ class NewPoll extends React.Component {
     addDuplicateVotesAllowed() {
         return (
             <div className="row">
-                <label className="col">Duplicate Votes Allowed: </label>
-                <div className="col"></div>
+                <label className="col-6">Duplicate Votes Allowed: </label>
                 <button
                     className={this.presentDuplicateVotesAllowed(true)}
                     type="button"
@@ -208,6 +208,7 @@ class NewPoll extends React.Component {
                     tabIndex={Object.keys(this.props.options).length+6}>Yes</button>
                 <button
                     className={this.presentDuplicateVotesAllowed(false)}
+                    id="second-choice"
                     type="button"
                     onClick={this.props.updateDuplicateVotesAllowed.bind(null, false)}
                     tabIndex={Object.keys(this.props.options).length+7}>No</button>
@@ -246,6 +247,7 @@ class NewPoll extends React.Component {
                 />
             </div>
             {Object.keys(this.props.options).map(this.addSelectionFields.bind(this))}
+            <div className="row separator"></div>
             {this.addPollExpiry()}
             {this.addVotesPerPerson()}
             {this.addDuplicateVotesAllowed()}

@@ -154,7 +154,7 @@ class Main extends React.Component {
                 numVotes={this.state.numVotes}
                 duplicateVotesAllowed={this.state.duplicateVotesAllowed}
                 totalVotes={this.state.totalVotes}
-                pollExiresIn={this.state.pollExpiresIn}
+                pollExpiresIn={this.state.pollExpiresIn}
                 pollExpiryUnit={this.state.pollExpiryUnit}>
            </NewPoll>
         </div>

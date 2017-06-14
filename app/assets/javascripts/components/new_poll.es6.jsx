@@ -2,6 +2,10 @@ class NewPoll extends React.Component {
 
     /* check if fields are filled */
 
+    componentWillMount() {
+        this.props.resetPollParams()
+    }
+
     filledOption(option) {
         if (this.props.options[option].length > 0) {
             return true
@@ -170,10 +174,10 @@ class NewPoll extends React.Component {
                     className="col"
                     name="poll-expiry-unit"
                     tabIndex={Object.keys(this.props.options).length+4}>
-                    <option value="minutes">minutes</option>
-                    <option value="hours">hours</option>
-                    <option value="days">days</option>
                     <option value="never">never</option>
+                    <option value="days">days</option>
+                    <option value="hours">hours</option>
+                    <option value="minutes">minutes</option>
                     <i className="fa fa-angle-down"></i>
                 </select>
             </div>
@@ -229,7 +233,6 @@ class NewPoll extends React.Component {
             </div>
         )
     }
-
 
 
   render () {

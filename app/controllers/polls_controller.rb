@@ -10,11 +10,9 @@ class PollsController < ApplicationController
     poll = Poll.new({
         :user_id => user.id,
         :lifespan => get_expiry_date(params[:poll_expires_in], params[:poll_expiry_unit]),
-        :votes_per_person => params[:votes_per_person].to_i,
+        :votes_per_person => params[:num_votes].to_i,
         :votes_required_per_person => params[:votes_required_per_person].to_i,
         :duplicate_votes_allowed => params[:duplicate_votes_allowed],
-        :multiple_votes_allowed => params[:multiple_votes_allowed],
-        :total_votes => params[:total_votes].to_i,
         :name => params[:question]
                     })
     if poll.save
@@ -28,6 +26,16 @@ class PollsController < ApplicationController
             :color => get_color(count)
                              })
         count += 1
+      end
+    end
+    respond_to do |format|
+      format.json do
+        render :json => {
+          :head => 'Success',
+          :pollData => poll.poll_data(user_participated=false),
+          :userPollVotes => user_votes,
+          :shareLink => share_link(poll.id)
+        }
       end
     end
   end
@@ -130,6 +138,10 @@ class PollsController < ApplicationController
   end
 
   def get_expiry_date expire_amount, expire_unit
+    if expire_unit == 'never'
+      expire_amount = 1000
+      expire_unit = 'years'
+    end
     expire_amount.to_i.send(expire_unit)
   end
 

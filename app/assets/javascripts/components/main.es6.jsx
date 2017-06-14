@@ -47,6 +47,16 @@ class Main extends React.Component {
 
     createPoll() {
         const successHandler = (data) => {
+            this.setState({
+                pollId: data.pollData.pollId,
+                pollData: data.pollData,
+                userPollVotes: data.userPollVotes,
+                shareLink: data.shareLink
+            }, function () {
+                this.setState({ pollContext: 'showPoll' })
+                this.updateSubscription()
+            })
+            this.resetPollParams()
         }
         const errorHandler = (data) => {
         }
@@ -71,6 +81,31 @@ class Main extends React.Component {
     }
 
     gatherPollParams() {
+        return {
+            "utf8": "checked",
+            "question": this.state.question,
+            "poll_expires_in": this.state.pollExpiresIn,
+            "poll_expiry_unit": this.state.pollExpiryUnit,
+            "duplicate_votes_allowed": this.state.duplicateVotesAllowed,
+            "num_votes": this.state.numVotes,
+            "options": this.state.options
+        }
+    }
+
+    resetPollParams() {
+        this.setState({
+            pollExpiresIn: 7,
+            pollExpiryUnit: 'never',
+            duplicateVotesAllowed: false,
+            numVotes: 1,
+            options: {
+                0: '',
+                1: '',
+                2: '',
+                3: ''
+            },
+            question: ''
+        })
     }
 
     subscribeToPoll(that) {
@@ -132,6 +167,81 @@ class Main extends React.Component {
         })
     }
 
+    pollSubscription(that) {
+        this.pollStream = App.cable.subscriptions.create("PollsChannel", {
+            pollData: that.state.pollData,
+            pollId: that.state.pollData.pollId,
+            connected: function() {
+                setTimeout(() => {
+                    this.perform('follow', {
+                        pollData: this.pollData,
+                        pollId: this.pollId,
+                        userId: that.state.userId
+                    })
+                }, 1000)
+            },
+            disconnected: function() {
+                this.perform('unfollow')
+            },
+            received: function(data) {
+                if (that.state.pollId == data.pollId) {
+                    that.updatePollData(data.pollData)
+                    that.setState({ voteCount: data.voteCount })
+                } else if (data.enableAccess && !(that.fullAccessToStream)) {
+                    console.log("enabling access...")
+                    that.setState({ fullAccessToStream: true })
+                    this.updateStream(that)
+                } else {
+                    console.log("Access to full poll data denied.")
+                    that.updatePollData(data.pollData)
+                    that.setState({ voteCount: data.voteCount })
+                }
+            },
+            updateStream: function(that) {
+                setTimeout(() => {
+                    this.perform('follow', {
+                        pollData: that.state.pollData,
+                        pollId: that.state.pollData.pollId,
+                        userId: that.state.userId
+                    })
+                }, 1000)
+            }
+
+        })
+    }
+
+    updateSubscription() {
+        this.pollStream.updateStream(this)
+    }
+
+    renderPollContext() {
+        if (this.state.pollContext === 'newPoll') {
+            return (
+                <NewPoll
+                    changeContext={this.changeContext.bind(this)}
+                    updateFormField={this.updateFormField.bind(this)}
+                    updateSelectionField={this.updateSelectionField.bind(this)}
+                    updateDuplicateVotesAllowed={this.updateDuplicateVotesAllowed.bind(this)}
+                    increaseOptionCount={this.increaseOptionCount.bind(this)}
+                    resetPollParams={this.resetPollParams.bind(this)}
+                    createPoll={this.createPoll.bind(this)}
+                    question={this.state.question}
+                    options={this.state.options}
+                    numVotes={this.state.numVotes}
+                    duplicateVotesAllowed={this.state.duplicateVotesAllowed}
+                    totalVotes={this.state.totalVotes}
+                    pollExpiresIn={this.state.pollExpiresIn}
+                    pollExpiryUnit={this.state.pollExpiryUnit}>
+                </NewPoll>
+            )
+        } else if (this.state.pollContext === 'showPoll') {
+            return (
+                <Poll>
+                </Poll>
+            )
+        }
+    }
+
   render () {
 
     return(
@@ -142,21 +252,7 @@ class Main extends React.Component {
                 popularPolls={this.state.popularPolls}
                 changeContext={this.changeContext.bind(this)}>
             </MainMenu>
-           <NewPoll
-                changeContext={this.changeContext.bind(this)}
-                updateFormField={this.updateFormField.bind(this)}
-                updateSelectionField={this.updateSelectionField.bind(this)}
-                updateDuplicateVotesAllowed={this.updateDuplicateVotesAllowed.bind(this)}
-                increaseOptionCount={this.increaseOptionCount.bind(this)}
-                createPoll={this.createPoll.bind(this)}
-                question={this.state.question}
-                options={this.state.options}
-                numVotes={this.state.numVotes}
-                duplicateVotesAllowed={this.state.duplicateVotesAllowed}
-                totalVotes={this.state.totalVotes}
-                pollExpiresIn={this.state.pollExpiresIn}
-                pollExpiryUnit={this.state.pollExpiryUnit}>
-           </NewPoll>
+            {this.renderPollContext()}
         </div>
     )
   }

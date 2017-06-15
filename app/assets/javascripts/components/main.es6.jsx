@@ -5,11 +5,28 @@ class Main extends React.Component {
         super(props)
         this.state = {
             ...props,
+            light: this.getLightSwitchMode()
         }
     }
 
     componentDidMount() {
         this.pollSubscription(this)
+    }
+
+    getLightSwitchMode() {
+        const light = localStorage.getItem('strawpoll_light')
+        if (light === null) {
+            return true
+        } else {
+            return light
+        }
+    }
+
+    toggleLightSwitch() {
+        this.setState({
+            light: !this.state.light
+        })
+        localStorage.setItem('light', this.state.light)
     }
 
     updateFormField(field, event) {
@@ -260,7 +277,8 @@ class Main extends React.Component {
                     duplicateVotesAllowed={this.state.duplicateVotesAllowed}
                     totalVotes={this.state.totalVotes}
                     pollExpiresIn={this.state.pollExpiresIn}
-                    pollExpiryUnit={this.state.pollExpiryUnit}>
+                    pollExpiryUnit={this.state.pollExpiryUnit}
+                    light={this.state.light}>
                 </NewPoll>
             )
         } else if (this.state.pollContext === 'showPoll') {
@@ -273,7 +291,8 @@ class Main extends React.Component {
                     duplicateVotesAllowed={this.state.pollData.duplicate_votes_allowed}
                     userParticipated={this.state.userParticipated}
                     vote={this.vote.bind(this)}
-                    shareLink={this.state.shareLink}>
+                    shareLink={this.state.shareLink}
+                    light={this.state.light}>
                 </Poll>
             )
         } else if (this.state.pollContext === 'mount') {
@@ -289,12 +308,14 @@ class Main extends React.Component {
                 getPoll={this.getPoll.bind(this)}
                 userPolls={this.state.userPolls}
                 popularPolls={this.state.popularPolls}
-                changeContext={this.changeContext.bind(this)}>
+                changeContext={this.changeContext.bind(this)}
+                toggleLightSwitch={this.toggleLightSwitch.bind(this)}
+                light={this.state.light}>
             </MainMenu>
             {this.renderPollContext()}
-            <section id="chart-container">
+            <div id="chart-container">
                 <canvas id="pie-chart"></canvas>
-            </section>
+            </div>
         </div>
     )
   }

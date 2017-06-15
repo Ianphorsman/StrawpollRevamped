@@ -13,6 +13,7 @@ class HomeController < ApplicationController
     update_react_params_with_user_data
     update_react_params_with_poll_data user, poll
     update_react_params_poll_context 'mount'
+    @react_params[:shareLink] = share_link(poll.id)
   end
 
 end

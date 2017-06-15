@@ -28,9 +28,9 @@ class Bar extends React.Component {
 
     userVoteStyle() {
         if (this.props.userVotes > 0) {
-            return "progress col-xs-12 user-selected";
+            return "progress container user-selected";
         } else {
-            return "progress col-xs-12";
+            return "progress container";
         }
     }
 

@@ -39,10 +39,10 @@ class BarVisualizer extends React.Component {
 
       render () {
           return (
-              <section id="bar-visualizer">
-                  <h5 className="question">{this.props.pollData.question}</h5>
+              <section id="bar-visualizer" className="container-fluid">
+                  <h5 className="question container">{this.props.pollData.question}</h5>
                   {this.props.pollData.options.map(this.renderBarFor.bind(this))}
-                  <h5>{this.messages()}</h5>
+                  <h5 className="container">{this.messages()}</h5>
               </section>
           );
       }

@@ -60,7 +60,8 @@ class ApplicationController < ActionController::Base
       :numVotes               => "",
       :votesRequired          => "",
       :duplicateVotesAllowed  => false,
-      :totalVotes             => ""
+      :totalVotes             => "",
+      :light                  => true
     }
   end
   helper_method :default_react_params

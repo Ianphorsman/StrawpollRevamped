@@ -3,10 +3,11 @@ class Poll extends React.Component {
 
   render () {
     return (
-        <section>
+        <section className="card">
             <PieChart
                 pollData={this.props.pollData}
-                userHasVoted={this.props.userHasVoted}>
+                userHasVoted={this.props.userHasVoted}
+                light={this.props.light}>
             </PieChart>
             <BarVisualizer
                 pollData={this.props.pollData}
@@ -15,9 +16,10 @@ class Poll extends React.Component {
                 userHasVoted={this.props.userHasVoted}
                 duplicateVotesAllowed={this.props.duplicateVotesAllowed}
                 userParticipated={this.props.userParticipated}
-                vote={this.props.vote}>
+                vote={this.props.vote}
+                light={this.props.light}>
             </BarVisualizer>
-            <p>{this.props.shareLink}</p>
+            <p className="container well">{this.props.shareLink}</p>
         </section>
     );
   }

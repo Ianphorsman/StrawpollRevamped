@@ -32,9 +32,13 @@ class PieChart extends React.Component {
         }
     }
 
+    componentDidMount() {
+        console.log(this.plotLocation())
+    }
+
 
     render() {
-        this.resetChart()
+        this.resetChart();
         let pieChart = new Chart(this.plotLocation(), {
             type: 'doughnut',
             data: this.data(),

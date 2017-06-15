@@ -20,6 +20,7 @@ body {
   font-family: 'Patrick Hand SC', cursive;
   background-color: #f8f8f8;
 }
+
 select, button, a {
   font-family: 'Patrick Hand SC', cursive;
   border-radius: 0 !important;
@@ -162,6 +163,8 @@ input {
 
 h1 {
   color: $amber;
+  position: relative;
+  overflow: hidden;
 }
 
 header {
@@ -170,4 +173,116 @@ header {
   .navbar {
     height: 4rem;
   }
+}
+
+#bar-visualizer {
+  padding: 0 !important;
+}
+
+.progress {
+  position: relative;
+  height: 2rem;
+  border-bottom: solid 1px darken($amber, 10%);
+  border-radius: 0;
+  background-color: $amber;
+  overflow: visible !important;
+  &:before {
+    content: '';
+    position: absolute;
+    overflow: visible !important;
+    left: -10vw;
+    height: 2rem;
+    max-width: 10vw;
+    background-color: $amber;
+    border-bottom: solid 1px darken($amber, 10%);
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    overflow: visible !important;
+    left: 100%;
+    height: 2rem;
+    max-width: 20vw;
+    background-color: $amber;
+    border-bottom: solid 1px darken($amber, 10%);
+  }
+
+
+  h5 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0;
+    margin: 0;
+    color: black;
+    z-index: 1;
+    //left: 1rem;
+  }
+}
+
+.progress-bar {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $river;
+  transition: width .2s;
+  height: inherit;
+}
+
+
+
+.vote-count {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 6rem;
+  font-size: 0.8rem;
+}
+
+.vote {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 1rem;
+  color: $river;
+  background-color: transparent;
+  z-index: 3;
+}
+
+.vote-percentage {
+  position: absolute;
+  transform: translateY(-50%);
+  top: 50%;
+  right: 3rem;
+  font-size: 0.8rem;
+}
+
+.question {
+  font-style: italic;
+  background-color: $waterhole;
+}
+
+#light-switch {
+  background-color: transparent;
+  font-size: 1.5rem;
+  right: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  &.light-on {
+    text-shadow: 0 0 10px lighten($amber, 10%);
+    color: $amber;
+    transition: text-shadow .2s, color .2s;
+  }
+  &.light-off {
+    color: $river;
+    transition: text-shadow .2s, color .2s;
+  }
+}
+
+canvas {
+  height: 200px;
+  width: 200px;
+  display: block !important;
 }

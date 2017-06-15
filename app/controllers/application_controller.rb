@@ -5,7 +5,10 @@ class ApplicationController < ActionController::Base
       'http://takeapoll.xyz',
       'www.takeapoll.xyz',
       '127.0.0.1',
-      'http://localhost:3000'
+      'http://localhost:3000',
+      '10.0.1.31:3000',
+      '10.0.1.13:3000',
+      '10.0.1.9:3000'
   ]
 
   def user_participated?
@@ -78,7 +81,7 @@ class ApplicationController < ActionController::Base
               :question => poll.name,
               :voteCount => poll.vote_count
           }
-        end.sort_by { |poll| -poll[:vote_count] }.first(10)
+        end.sort_by { |poll| -poll[:voteCount] }.first(10)
       else
         @react_params[:userPolls] = []
       end
@@ -88,7 +91,7 @@ class ApplicationController < ActionController::Base
   helper_method :update_react_params_with_user_data
 
   def update_react_params_with_popular_polls
-    if Poll.all.count > 0
+    if Poll.all.count > 1
       @react_params[:popularPolls] = Poll.all.sort_by { |poll| poll.vote_count }.last(10).map do |poll|
         {
             :id => poll.id,
@@ -110,6 +113,11 @@ class ApplicationController < ActionController::Base
     end
   end
   helper_method :update_react_params_with_poll_data
+
+  def update_react_params_poll_context context
+    @react_params[:pollContext] = context
+  end
+  helper_method :update_react_params_poll_context
 
   private
 

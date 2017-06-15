@@ -12,10 +12,7 @@ class HomeController < ApplicationController
     poll = Poll.find_by_id(params[:poll_id])
     update_react_params_with_user_data
     update_react_params_with_poll_data user, poll
-
-    respond_to do |format|
-      format.html
-    end
+    update_react_params_poll_context 'mount'
   end
 
 end

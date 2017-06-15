@@ -6,8 +6,11 @@ class PollsChannel < ApplicationCable::Channel
 
   def follow(data) # { pollData => {}, pollId => int }
     stop_all_streams
-    user = User.find_by_id(data[:userId])
-    poll = Poll.find_by_id(data[:pollId])
+    p data["userId"]
+    p data["pollId"]
+    p data
+    user = User.find_by_id(data["userId"])
+    poll = Poll.find_by_id(data["pollId"])
     user_votes = user.votes.where(poll_id: poll.id).count
     votes_required = poll.votes_required_per_person
     if user_votes >= votes_required

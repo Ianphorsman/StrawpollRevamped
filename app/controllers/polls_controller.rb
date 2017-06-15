@@ -1,5 +1,7 @@
 class PollsController < ApplicationController
 
+
+
   def create
     user = authenticate_or_create_user
     if user.nil?
@@ -17,7 +19,7 @@ class PollsController < ApplicationController
                     })
     if poll.save
       count = 1
-      params[:options].each do |selection|
+      params[:options].each do |key, selection|
         PollSelection.create({
             :user_id => user.id,
             :poll_id => poll.id,
@@ -28,6 +30,7 @@ class PollsController < ApplicationController
         count += 1
       end
     end
+    request.format = :json
     respond_to do |format|
       format.json do
         render :json => {
@@ -49,6 +52,7 @@ class PollsController < ApplicationController
       @react_params[:shareLink] = share_link(poll.id)
       @react_params[:userParticipated] = user_participated?
     end
+    request.format = :json
     respond_to do |format|
       format.json do
         render :json => @react_params
@@ -81,7 +85,7 @@ class PollsController < ApplicationController
 
     end
     broadcast_vote_to user, poll
-
+    request.format = :json
     respond_to do |format|
       format.json {
         render :json => {

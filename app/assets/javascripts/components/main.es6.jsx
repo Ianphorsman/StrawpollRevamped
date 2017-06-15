@@ -47,6 +47,7 @@ class Main extends React.Component {
 
     createPoll() {
         const successHandler = (data) => {
+            console.log(data)
             this.setState({
                 pollId: data.pollData.pollId,
                 pollData: data.pollData,
@@ -77,7 +78,28 @@ class Main extends React.Component {
         })
     }
 
-    vote() {
+    vote(pollSelectionId, pollId) {
+        let successHandler = (data) => {
+            if (data.head !== 'Already voted') {
+                this.setState({
+                    userParticipated: data.userParticipated,
+                    userHasVoted: data.userHasVoted,
+                    userPollVotes: data.userPollVotes,
+                    userVotes: Object.assign(this.state.userVotes, data.vote)
+                })
+            }
+        }
+        $.ajax({
+            method: 'POST',
+            headers: {
+                'X-CSRF-Token': $("meta[name='csrf-token']").attr('content')
+            },
+            dataType: 'json',
+            contentType: 'application/json',
+            accepts: 'application/json',
+            url: '/poll/' + pollId + '/vote/' + pollSelectionId,
+            success: successHandler.bind(this)
+        })
     }
 
     gatherPollParams() {
@@ -167,6 +189,12 @@ class Main extends React.Component {
         })
     }
 
+    updatePollData(data) {
+        let copy = Object.assign({}, this.state.pollData)
+        copy = data
+        this.setState({ pollData: copy })
+    }
+
     pollSubscription(that) {
         this.pollStream = App.cable.subscriptions.create("PollsChannel", {
             pollData: that.state.pollData,
@@ -198,6 +226,7 @@ class Main extends React.Component {
                 }
             },
             updateStream: function(that) {
+                console.log("UserID:", that.state.userId)
                 setTimeout(() => {
                     this.perform('follow', {
                         pollData: that.state.pollData,
@@ -236,9 +265,19 @@ class Main extends React.Component {
             )
         } else if (this.state.pollContext === 'showPoll') {
             return (
-                <Poll>
+                <Poll
+                    pollData={this.state.pollData}
+                    userHasVoted={this.state.userHasVoted}
+                    voteCount={this.state.voteCount}
+                    userPollVotes={this.state.userPollVotes}
+                    duplicateVotesAllowed={this.state.pollData.duplicate_votes_allowed}
+                    userParticipated={this.state.userParticipated}
+                    vote={this.vote.bind(this)}
+                    shareLink={this.state.shareLink}>
                 </Poll>
             )
+        } else if (this.state.pollContext === 'mount') {
+            this.setState({ pollContext: 'showPoll' })
         }
     }
 
@@ -253,6 +292,9 @@ class Main extends React.Component {
                 changeContext={this.changeContext.bind(this)}>
             </MainMenu>
             {this.renderPollContext()}
+            <section id="chart-container">
+                <canvas id="pie-chart"></canvas>
+            </section>
         </div>
     )
   }

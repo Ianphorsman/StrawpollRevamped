@@ -14,7 +14,7 @@
 }
 
 body {
-  padding-top: 5rem;
+  padding-top: 4rem;
   width: 100%;
   height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -22,6 +22,9 @@ body {
   background-color: #f8f8f8;
 }
 
+h5 {
+  margin-bottom: 0;
+}
 select, button, a {
   font-family: 'Patrick Hand SC', cursive;
   border-radius: 0 !important;
@@ -182,11 +185,15 @@ header {
 
 .progress {
   position: relative;
-  height: 2rem;
-  border-bottom: solid 1px darken($amber, 10%);
+  height: inherit;
+  //border-bottom: solid 1px darken($amber, 10%);
   border-radius: 0;
   background-color: $amber;
   overflow: visible !important;
+  padding: 0 !important;
+  text-indent: 1.25rem;
+  border: none;
+
   &:before {
     content: '';
     position: absolute;
@@ -195,7 +202,7 @@ header {
     height: 2rem;
     max-width: 10vw;
     background-color: $amber;
-    border-bottom: solid 1px darken($amber, 10%);
+    //border-bottom: solid 1px darken($amber, 10%);
   }
   &:after {
     content: '';
@@ -205,7 +212,7 @@ header {
     height: 2rem;
     max-width: 20vw;
     background-color: $amber;
-    border-bottom: solid 1px darken($amber, 10%);
+    //border-bottom: solid 1px darken($amber, 10%);
   }
 
 
@@ -227,7 +234,9 @@ header {
   transform: translateY(-50%);
   background-color: $river;
   transition: width .2s;
-  height: inherit;
+  height: 100%;
+  border-top: solid 1px $river;
+  border-bottom: solid 1px $river;
 }
 
 
@@ -268,8 +277,10 @@ header {
   font-size: 1.5rem;
   right: 0;
   position: absolute;
+  line-height: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
+  vertical-align: baseline;
 
   &.light-on {
     text-shadow: 0 0 10px lighten($amber, 10%);
@@ -296,14 +307,43 @@ header {
   height: calc(100vh - 4rem);
 }
 
+.card {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
 #bar-visualizer {
-  border: solid 1px $carrot;
 
   .card-header, .card-footer {
     flex: 1;
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    border-radius: 0 !important;
   }
   .card-block {
     padding: 0;
     flex: 5;
+    overflow: scroll;
+    ul {
+      margin: -1px 0;
+    }
+    li {
+      min-height: 1rem;
+      padding: 1px 0;
+    }
   }
+}
+
+#card-footer {
+  background-color: #f8f8f8;
+}
+.votes-cast, .share-link {
+
+}
+
+[data-light='light-off'] {
+  background-color: black !important;
+  color: white !important;
+  border: none;
 }

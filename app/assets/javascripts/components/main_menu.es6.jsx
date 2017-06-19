@@ -22,8 +22,8 @@ class MainMenu extends React.Component {
 
   render () {
       return(
-          <header className="container-fluid fixed-top">
-              <div className="navbar container">
+          <header data-light={this.getLightSwitchClass()} className="fixed-top">
+              <div className="navbar">
                 <h1>Strawpoll
                     <span className="text-muted">Create and share here</span>
                     <span className="text-muted smiles">:)</span>

@@ -29,6 +29,14 @@ class BarVisualizer extends React.Component {
           )
       }
 
+    getLightSwitchClass() {
+        if (this.props.light) {
+            return "light-on"
+        } else {
+            return "light-off"
+        }
+    }
+
       messages() {
           if (this.props.voteCount == 0) {
               return "No votes have been cast yet."
@@ -39,14 +47,19 @@ class BarVisualizer extends React.Component {
 
       render () {
           return (
-              <section id="bar-visualizer" className="card h-100">
-                  <h5 className="question card-header">{this.props.pollData.question}</h5>
+              <section id="bar-visualizer" className="card h-100 w-100">
+                  <div className="question card-header">
+                      <h5>{this.props.pollData.question}</h5>
+                  </div>
                   <div className="card-block d-flex">
                       <ul className="list-group list-group-flush flex-column w-100">
                           {this.props.pollData.options.map(this.renderBarFor.bind(this))}
                       </ul>
                   </div>
-                  <h5 className="card-footer">{this.messages()}</h5>
+                  <div data-light={this.getLightSwitchClass()} id="card-footer" className="card-footer">
+                      <p className="card-text votes-cast">{this.messages()}</p>
+                      <p className="share-link">{this.props.shareLink}</p>
+                  </div>
               </section>
           );
       }

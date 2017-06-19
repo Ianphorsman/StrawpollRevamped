@@ -57,7 +57,8 @@ class Poll extends React.Component {
                 duplicateVotesAllowed={this.props.duplicateVotesAllowed}
                 userParticipated={this.props.userParticipated}
                 vote={this.props.vote}
-                light={this.props.light}>
+                light={this.props.light}
+                shareLink={this.props.shareLink}>
             </BarVisualizer>
         </section>
     );

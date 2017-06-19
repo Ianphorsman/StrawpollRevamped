@@ -303,7 +303,7 @@ class Main extends React.Component {
   render () {
 
     return(
-        <div>
+        <div id="main">
             <MainMenu
                 getPoll={this.getPoll.bind(this)}
                 userPolls={this.state.userPolls}
@@ -313,9 +313,6 @@ class Main extends React.Component {
                 light={this.state.light}>
             </MainMenu>
             {this.renderPollContext()}
-            <div id="chart-container">
-                <canvas id="pie-chart"></canvas>
-            </div>
         </div>
     )
   }

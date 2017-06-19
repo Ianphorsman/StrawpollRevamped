@@ -16,6 +16,7 @@
 body {
   padding-top: 5rem;
   width: 100%;
+  height: 100vh;
   -webkit-font-smoothing: antialiased;
   font-family: 'Patrick Hand SC', cursive;
   background-color: #f8f8f8;
@@ -280,9 +281,29 @@ header {
     transition: text-shadow .2s, color .2s;
   }
 }
+#chart-container {
+  text-align: center;
+  #chart-legend {
+    border: none;
+  }
+}
 
-canvas {
-  height: 200px;
-  width: 200px;
-  display: block !important;
+.list-group-item {
+  flex: 1;
+}
+
+#main {
+  height: calc(100vh - 4rem);
+}
+
+#bar-visualizer {
+  border: solid 1px $carrot;
+
+  .card-header, .card-footer {
+    flex: 1;
+  }
+  .card-block {
+    padding: 0;
+    flex: 5;
+  }
 }

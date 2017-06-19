@@ -14,8 +14,9 @@ class PieChart extends React.Component {
 
 
     resetChart () {
-        $('#chart-container canvas').remove();
-        $('#chart-container').append("<canvas id='pie-chart'></canvas>");
+        $('#pie-chart-container canvas').remove();
+        $('#chart-legend').remove();
+        $('#pie-chart-container').append("<canvas id='pie-chart'></canvas>");
     }
 
     plotLocation () {
@@ -32,18 +33,31 @@ class PieChart extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.plotLocation())
-    }
-
 
     render() {
         this.resetChart();
         let pieChart = new Chart(this.plotLocation(), {
             type: 'doughnut',
             data: this.data(),
-            options: { animation: false }
+            options: {
+                animation: false,
+                legend: false,
+                legendCallback: function(chart) {
+                    let text = []
+                    text.push("<ul id='chart-legend' class='" + chart.id + "-legend list-group col-3 my-auto'>")
+                    for (let i=0; i < chart.data.datasets[0].data.length; i++) {
+                        text.push("<li class='list-group-item legend-label'><span style='background-color:" + chart.data.datasets[0].backgroundColor[i] + "'>")
+                        if (chart.data.labels[i]) {
+                            text.push(chart.data.labels[i])
+                        }
+                        text.push("</span></li>")
+                    }
+                    text.push("</ul>")
+                    return text.join('')
+                }
+            }
         })
+        $('#chart-container').append(pieChart.generateLegend())
         return <div />
     }
 }

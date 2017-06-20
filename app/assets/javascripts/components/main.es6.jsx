@@ -15,10 +15,14 @@ class Main extends React.Component {
 
     getLightSwitchMode() {
         const light = localStorage.getItem('strawpoll_light')
-        if (light === null) {
+        console.log(light)
+        if (light === true || light === 'true') {
+            console.log("evals to true")
             return true
+        } else if (light === false || light === 'false') {
+            return false
         } else {
-            return light
+            true
         }
     }
 
@@ -33,8 +37,9 @@ class Main extends React.Component {
     toggleLightSwitch() {
         this.setState({
             light: !this.state.light
+        }, function() {
+            localStorage.setItem('strawpoll_light', this.state.light)
         })
-        localStorage.setItem('light', this.state.light)
     }
 
     updateFormField(field, event) {

@@ -22,6 +22,14 @@ class Main extends React.Component {
         }
     }
 
+    getLightSwitch() {
+        if (this.state.light) {
+            return 'light-on'
+        } else {
+            return 'light-off'
+        }
+    }
+
     toggleLightSwitch() {
         this.setState({
             light: !this.state.light
@@ -303,7 +311,7 @@ class Main extends React.Component {
   render () {
 
     return(
-        <div id="main">
+        <div id="main" data-light={this.getLightSwitch()}>
             <MainMenu
                 getPoll={this.getPoll.bind(this)}
                 userPolls={this.state.userPolls}

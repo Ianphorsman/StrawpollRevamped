@@ -286,7 +286,8 @@ class Main extends React.Component {
                     totalVotes={this.state.totalVotes}
                     pollExpiresIn={this.state.pollExpiresIn}
                     pollExpiryUnit={this.state.pollExpiryUnit}
-                    light={this.state.light}>
+                    light={this.state.light}
+                    lightClass={this.getLightSwitch.bind(this)}>
                 </NewPoll>
             )
         } else if (this.state.pollContext === 'showPoll') {
@@ -300,7 +301,8 @@ class Main extends React.Component {
                     userParticipated={this.state.userParticipated}
                     vote={this.vote.bind(this)}
                     shareLink={this.state.shareLink}
-                    light={this.state.light}>
+                    light={this.state.light}
+                    lightClass={this.getLightSwitch.bind(this)}>
                 </Poll>
             )
         } else if (this.state.pollContext === 'mount') {
@@ -311,14 +313,15 @@ class Main extends React.Component {
   render () {
 
     return(
-        <div id="main" data-light={this.getLightSwitch()}>
+        <div id="main">
             <MainMenu
                 getPoll={this.getPoll.bind(this)}
                 userPolls={this.state.userPolls}
                 popularPolls={this.state.popularPolls}
                 changeContext={this.changeContext.bind(this)}
                 toggleLightSwitch={this.toggleLightSwitch.bind(this)}
-                light={this.state.light}>
+                light={this.state.light}
+                lightClass={this.getLightSwitch.bind(this)}>
             </MainMenu>
             {this.renderPollContext()}
         </div>

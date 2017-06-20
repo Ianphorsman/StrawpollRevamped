@@ -58,6 +58,7 @@ class Poll extends React.Component {
                 userParticipated={this.props.userParticipated}
                 vote={this.props.vote}
                 light={this.props.light}
+                lightClass={this.props.lightClass}
                 shareLink={this.props.shareLink}>
             </BarVisualizer>
         </section>

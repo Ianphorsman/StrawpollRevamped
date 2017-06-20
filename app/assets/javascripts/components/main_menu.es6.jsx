@@ -12,17 +12,9 @@ class MainMenu extends React.Component {
         )
     }
 
-    getLightSwitchClass() {
-        if (this.props.light) {
-            return "light-on"
-        } else {
-            return "light-off"
-        }
-    }
-
   render () {
       return(
-          <header data-light={this.getLightSwitchClass()} className="fixed-top">
+          <header data-light={this.props.lightClass()} className="fixed-top">
               <div className="navbar">
                 <h1>Strawpoll
                     <span className="text-muted">Create and share here</span>
@@ -31,7 +23,7 @@ class MainMenu extends React.Component {
                         type="button"
                         onClick={this.props.toggleLightSwitch.bind(null)}
                         id="light-switch"
-                        className={this.getLightSwitchClass()}>
+                        className={this.props.lightClass()}>
                         <i className="fa fa-lightbulb-o"></i>
                     </button>
                 </h1>

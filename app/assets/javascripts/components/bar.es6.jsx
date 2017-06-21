@@ -20,7 +20,9 @@ class Bar extends React.Component {
         if (this.props.pollOpen && !(this.props.userParticipated)) {
             if ((!(this.props.duplicateVotesAllowed) && this.props.userVotes == 0) || this.props.duplicateVotesAllowed) {
                 return(
-                    <button className="vote" type="button" onClick={this.props.vote.bind(this, this.props.pollSelectionId, this.props.pollId)}><i className="fa fa-plus"></i></button>
+                    <button className="vote" type="button" onClick={this.props.vote.bind(this, this.props.pollSelectionId, this.props.pollId)}>
+                        <i className="fa fa-plus"></i>
+                    </button>
                 );
             }
         }

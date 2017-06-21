@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   ActionCable.server.config.allowed_request_origins = [
       'http://takeapoll.xyz',
+'http://www.takeapoll.xyz',
       'www.takeapoll.xyz',
       '127.0.0.1',
       'http://localhost:3000',

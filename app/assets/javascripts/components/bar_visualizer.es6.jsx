@@ -29,11 +29,11 @@ class BarVisualizer extends React.Component {
           )
       }
 
-      messages() {
-          if (this.props.voteCount == 0) {
-              return "No votes have been cast yet."
+      pollOpenMessage() {
+          if (this.props.pollData.pollOpen) {
+              return "Poll Open"
           } else {
-              return "Total votes so far: " + this.props.voteCount + "."
+              return "Poll Closed"
           }
       }
 
@@ -48,9 +48,25 @@ class BarVisualizer extends React.Component {
                           {this.props.pollData.options.map(this.renderBarFor.bind(this))}
                       </ul>
                   </div>
-                  <div data-light={this.props.lightClass()} id="card-footer" className="card-footer">
-                      <p className="card-text votes-cast">{this.messages()}</p>
-                      <p className="share-link">{this.props.shareLink}</p>
+                  <div data-light={this.props.lightClass()} id="card-footer" className="card-footer flex-row">
+                      <div className="xs">
+                          <p>{this.props.voteCount}</p>
+                          <label className="text-muted">Votes Cast</label>
+                      </div>
+                      <div className="xs">
+                          <p>{this.pollOpenMessage()}</p>
+                          <label className="text-muted">{this.props.pollData.lifespan}</label>
+                      </div>
+                      <div className="xs share-link">
+                          <p>{this.props.shareLink}</p>
+                          <label className="text-muted">Poll Url</label>
+                      </div>
+                      <div className="xs">
+                          <button type="button" onClick={this.props.toggleModal.bind(null)}>
+                              <i className="fa fa-pie-chart" preserveAspectRatio="xMidYMid"></i>
+                          </button>
+                          <label className="text-muted">View Graph</label>
+                      </div>
                   </div>
               </section>
           );

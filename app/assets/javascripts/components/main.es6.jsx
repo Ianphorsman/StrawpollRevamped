@@ -15,9 +15,7 @@ class Main extends React.Component {
 
     getLightSwitchMode() {
         const light = localStorage.getItem('strawpoll_light')
-        console.log(light)
         if (light === true || light === 'true') {
-            console.log("evals to true")
             return true
         } else if (light === false || light === 'false') {
             return false
@@ -40,6 +38,18 @@ class Main extends React.Component {
         }, function() {
             localStorage.setItem('strawpoll_light', this.state.light)
         })
+    }
+
+    toggleModal() {
+        this.setState({
+            showModal: !this.state.showModal
+        }, function() {
+            $('#modal').modal('show')
+        })
+    }
+
+    copyToClipboard(link) {
+
     }
 
     updateFormField(field, event) {
@@ -307,7 +317,9 @@ class Main extends React.Component {
                     vote={this.vote.bind(this)}
                     shareLink={this.state.shareLink}
                     light={this.state.light}
-                    lightClass={this.getLightSwitch.bind(this)}>
+                    lightClass={this.getLightSwitch.bind(this)}
+                    toggleModal={this.toggleModal.bind(this)}
+                    copyToClipboard={this.copyToClipboard.bind(this)}>
                 </Poll>
             )
         } else if (this.state.pollContext === 'mount') {
@@ -328,6 +340,14 @@ class Main extends React.Component {
                 light={this.state.light}
                 lightClass={this.getLightSwitch.bind(this)}>
             </MainMenu>
+            <Modal
+                light={this.state.light}
+                lightClass={this.getLightSwitch.bind(this)}
+                pollData={this.state.pollData}
+                userHasVoted={this.state.userHasVoted}
+                voteCount={this.state.voteCount}
+                showModal={this.state.showModal}>
+            </Modal>
             {this.renderPollContext()}
         </div>
     )

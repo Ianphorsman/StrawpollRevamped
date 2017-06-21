@@ -325,7 +325,9 @@ header {
     padding: 0;
     flex: 5;
     overflow-y: auto;
+    overflow-x: hidden;
     background-color: $amber;
+    border: none;
     ul {
       margin: -1px 0;
     }
@@ -338,9 +340,58 @@ header {
 
 #card-footer {
   background-color: #f8f8f8;
-}
-.votes-cast, .share-link {
+  padding: 0;
 
+  div {
+    flex: 1;
+    position: relative;
+    label {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin: 0;
+      height: 1rem;
+      &.text-muted {
+        margin: 0;
+      }
+    }
+    p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    button {
+      background-color: transparent;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      i {
+        font-size: 2rem;
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  #card-footer {
+    .share-link {
+      display: none;
+    }
+    p, button {
+      top: 30% !important;
+    }
+    .text-muted {
+      font-size: 0.8rem;
+      width: 100%;
+      text-align: center;
+    }
+    i {
+      font-size: 1rem !important;
+    }
+  }
 }
 
 [data-light='light-off'] {

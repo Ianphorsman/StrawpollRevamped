@@ -165,7 +165,7 @@ input {
   }
 }
 
-h1 {
+h1, h3 {
   color: $amber;
   position: relative;
   overflow: hidden;
@@ -296,6 +296,21 @@ header {
   text-align: center;
   #chart-legend {
     border: none;
+    .list-group-item {
+      background-color: transparent;
+      padding: 0;
+      text-indent: 2.5rem;
+      color: $amber;
+      position: relative;
+      flex: 1;
+      min-width: 25%;
+      span {
+        height: 1rem;
+        width: 1rem;
+        position: absolute;
+        left: 0;
+      }
+    }
   }
 }
 
@@ -375,6 +390,18 @@ header {
   }
 }
 
+#modal {
+
+  button {
+    background-color: transparent;
+  }
+  .modal-header {
+    border-bottom: solid 1px $amber;
+  }
+  .modal-footer {
+    border-top: solid 1px $amber;
+  }
+}
 @media (max-width: 576px) {
   #card-footer {
     .share-link {

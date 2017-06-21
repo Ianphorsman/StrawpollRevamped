@@ -44,13 +44,13 @@ class PieChart extends React.Component {
                 legend: false,
                 legendCallback: function(chart) {
                     let text = []
-                    text.push("<ul id='chart-legend' class='" + chart.id + "-legend list-group col-3 my-auto'>")
+                    text.push("<ul id='chart-legend' class='" + chart.id + "-legend list-group flex-row flex-wrap'>")
                     for (let i=0; i < chart.data.datasets[0].data.length; i++) {
-                        text.push("<li class='list-group-item legend-label'><span style='background-color:" + chart.data.datasets[0].backgroundColor[i] + "'>")
+                        text.push("<li class='list-group-item legend-label'><span style='background-color:" + chart.data.datasets[0].backgroundColor[i] + "'></span>")
                         if (chart.data.labels[i]) {
                             text.push(chart.data.labels[i])
                         }
-                        text.push("</span></li>")
+                        text.push("</li>")
                     }
                     text.push("</ul>")
                     return text.join('')

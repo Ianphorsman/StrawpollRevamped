@@ -44,19 +44,17 @@ class Modal extends React.Component {
         <div className={this.getModalClass()} id="modal" tabIndex="-1" aria-hidden={!this.props.showModal}>
             <div className="modal-dialog" role="document">
                 <div className="modal-content">
-                    <div className="modal-header">
-                        <h1>Pie Chart</h1>
-                        <button type="button" data-dismiss="modal">Close</button>
+                    <div data-light={this.props.lightClass()} className="modal-header">
+                        <h3>{this.props.pollData.question}</h3>
+                        <button type="button" data-dismiss="modal"><i className="fa fa-close"></i></button>
                     </div>
-                    <div className="modal-body">
+                    <div data-light={this.props.lightClass()} className="modal-body">
                         <div id="chart-container">
                             <div id="pie-chart-container">
                                 <canvas id="pie-chart"></canvas>
                             </div>
                         </div>
                         {this.renderPieChart()}
-                    </div>
-                    <div className="modal-footer">
                     </div>
                 </div>
             </div>

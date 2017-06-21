@@ -17,6 +17,6 @@
 .byebug_history
 
 /config/local_env.yml
-
+/public/*
 /node_modulesnode_modules/
 package.json

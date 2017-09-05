@@ -143,7 +143,6 @@ class NewPoll extends React.Component {
 
     addSelectionFields(option) {
         return (
-            <div className="row">
                 <input
                     type="text"
                     name={"option_" + option}
@@ -153,41 +152,46 @@ class NewPoll extends React.Component {
                     placeholder="Answer"
                     tabIndex={parseInt(option)+2}
                 />
-            </div>
         )
     }
 
     addPollExpiry() {
         return (
-            <div className="row select">
-                <label className="col-6">Close poll in </label>
-                <input
-                    className={this.presentPollExpiresIn()}
-                    onChange={this.props.updateFormField.bind(null, 'pollExpiresIn')}
-                    type="text"
-                    name="poll-expires-in"
-                    placeholder="7"
-                    tabIndex={Object.keys(this.props.options).length+3}
-                />
-                <select
-                    onChange={this.props.updateFormField.bind(null, 'pollExpiryUnit')}
-                    className="col"
-                    name="poll-expiry-unit"
-                    tabIndex={Object.keys(this.props.options).length+4}>
-                    <option value="never">never</option>
-                    <option value="days">days</option>
-                    <option value="hours">hours</option>
-                    <option value="minutes">minutes</option>
-                    <i className="fa fa-angle-down"></i>
-                </select>
+            <div className="select xs">
+                <div>
+                    <label>Close poll in</label>
+                </div>
+                <div className="poll-expiry">
+                    <input
+                        className={this.presentPollExpiresIn()}
+                        onChange={this.props.updateFormField.bind(null, 'pollExpiresIn')}
+                        type="text"
+                        name="poll-expires-in"
+                        placeholder="7"
+                        tabIndex={Object.keys(this.props.options).length+3}
+                    />
+                    <select
+                        onChange={this.props.updateFormField.bind(null, 'pollExpiryUnit')}
+                        className="col"
+                        name="poll-expiry-unit"
+                        tabIndex={Object.keys(this.props.options).length+4}>
+                        <option value="never">never</option>
+                        <option value="days">days</option>
+                        <option value="hours">hours</option>
+                        <option value="minutes">minutes</option>
+                        <i className="fa fa-angle-down"></i>
+                    </select>
+                </div>
             </div>
         )
     }
 
     addVotesPerPerson() {
         return (
-            <div className="row adv-option">
-                <label className="col-6">Votes allowed per person: </label>
+            <div className="adv-option xs">
+                <div>
+                    <label>Votes allowed per person</label>
+                </div>
                 <input
                     className={this.presentNumVotesAllowed()}
                     onChange={this.props.updateFormField.bind(null, 'numVotes')}
@@ -196,15 +200,17 @@ class NewPoll extends React.Component {
                     placeholder="1"
                     tabIndex={Object.keys(this.props.options).length+5}
                 />
-                <div className="col"></div>
             </div>
         )
     }
 
     addDuplicateVotesAllowed() {
         return (
-            <div className="row">
-                <label className="col-6">Duplicate Votes Allowed: </label>
+            <div className="xs">
+                <div>
+                    <label>Duplicate Votes Allowed</label>
+                </div>
+                <div className="duplicates-allowed">
                 <button
                     className={this.presentDuplicateVotesAllowed(true)}
                     type="button"
@@ -216,29 +222,28 @@ class NewPoll extends React.Component {
                     type="button"
                     onClick={this.props.updateDuplicateVotesAllowed.bind(null, false)}
                     tabIndex={Object.keys(this.props.options).length+7}>No</button>
+                </div>
             </div>
         )
     }
 
     addFormSubmit() {
         return (
-            <div className="row">
-                    <button
-                        type="button"
-                        className={this.createPollEnabled()}
-                        onClick={this.props.createPoll.bind(null)}
-                        tabIndex={Object.keys(this.props.options).length+8}>
-                        Create
-                    </button>
-            </div>
+                <button
+                    type="button"
+                    className={this.createPollEnabled()}
+                    onClick={this.props.createPoll.bind(null)}
+                    tabIndex={Object.keys(this.props.options).length+8}>
+                    Create
+                </button>
         )
     }
 
 
   render () {
     return(
-        <section id="new-poll-form" className="container">
-            <div className="row">
+        <section id="new-poll-form" className="d-flex flex-column h-100 w-100">
+            <div className="question-container">
                 <input
                     className={this.presentQuestion()}
                     name="question"
@@ -249,12 +254,17 @@ class NewPoll extends React.Component {
                     tabIndex="1"
                 />
             </div>
-            {Object.keys(this.props.options).map(this.addSelectionFields.bind(this))}
-            <div className="row separator"></div>
-            {this.addPollExpiry()}
-            {this.addVotesPerPerson()}
-            {this.addDuplicateVotesAllowed()}
-            {this.addFormSubmit()}
+            <div className="answers-container d-flex flex-column">
+                {Object.keys(this.props.options).map(this.addSelectionFields.bind(this))}
+            </div>
+            <div className="poll-options-container d-flex flex-row">
+                {this.addPollExpiry()}
+                {this.addVotesPerPerson()}
+                {this.addDuplicateVotesAllowed()}
+            </div>
+            <div className="create-container d-flex">
+                {this.addFormSubmit()}
+            </div>
         </section>
     )
   }

@@ -30,9 +30,7 @@ select, button, a {
   border-radius: 0 !important;
 }
 select {
-  background-color: mix(white, #f8f8f8) !important;
   border: none;
-  border-left: solid 2px #f8f8f8;
   color: $river;
   text-align: center;
   appearance: none;
@@ -42,42 +40,15 @@ select {
   cursor: pointer;
   &:focus {
     outline: none;
-    font-weight: bold;
-    text-shadow: 0 0 3px lighten($amber, 10%);
   }
 }
 .col.adv-option {
   text-align: center;
 }
-.select {
-  position: relative;
-  margin-bottom: 0.5rem;
-  &:after {
-    content: '\f0dc';
-    position: absolute;
-    font-family: FontAwesome;
-    right: 0;
-    bottom: 0.5rem;
-    color: $river;
-    //border: solid 1px black;
-  }
-  input {
-    text-align: center;
-  }
-
-}
 .adv-option {
-  margin-bottom: 0.5rem;
   input {
     text-align: center;
   }
-}
-.separator {
-  border-bottom: solid 1px transparentize($amber, 0.5);
-  margin-top: 1vh;
-  margin-bottom: 1vh;
-  z-index: 2;
-  position: relative;
 }
 button {
   color: $amber;
@@ -93,13 +64,15 @@ button {
     outline: none;
   }
 }
-#second-choice {
-  border-left: solid 2px #f8f8f8 !important;
-}
 .create-poll {
-  margin-top: 1vh;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
+  text-shadow: 0 0 3px lighten($amber, 10%);
+  background-color: black;
+  &.disabled {
+    opacity: 1 !important;
+    text-shadow: none;
+  }
 }
 input {
   border: none;
@@ -112,50 +85,32 @@ input {
   }
   &[type="text"].option {
     font-size: 1.5rem;
-    margin-bottom: 2vh;
-    transition: margin .2s;
+    min-height: 1.5rem;
     background-color: mix(white, #f8f8f8);
-    box-shadow: inset 0 0 5px 1px #f8f8f8;
     &.question.filled {
       &:focus {
         background-color: mix(white, #f8f8f8);
-        box-shadow: inset 0 0 5px 1px #f8f8f8;
         font-style: normal;
       }
     }
     &:focus {
-      margin-bottom: 3vh;
-      transition: margin .2s;
       &.filled, &.error {
         background-color: mix(white, #f8f8f8);
-        box-shadow: inset 0 0 5px 1px #f8f8f8;
-        margin-bottom: 3vh;
       }
     }
     &.filled {
       background-color: $river;
-      margin-bottom: 0.5vh;
-      transition: margin .2s;
-      box-shadow: none;
       &.question {
-        margin-bottom: 2vh;
         background-color: lighten($amber, 5%);
         font-style: italic;
       }
     }
     &.error {
       background-color: $pomegranate;
-      margin-bottom: 1vh;
-      transition: margin .2s;
-      box-shadow: none;
-      &.question {
-        margin-bottom: 2vh;
-      }
     }
   }
   &.poll-option {
     background-color: mix(white, #f8f8f8);
-    box-shadow: inset 0 0 5px 1px #f8f8f8;
     &.filled {
       color: $river;
       &:focus {
@@ -371,6 +326,69 @@ header {
   }
 }
 
+#new-poll-form {
+  .question-container {
+    flex: 1;
+    input {
+      height: 100%;
+      width: 100%;
+      background-color: $waterhole;
+    }
+  }
+  .answers-container {
+    flex: 4;
+    overflow-y: scroll;
+    input {
+      background-color: $amber;
+    }
+  }
+  .poll-options-container {
+    flex: 2;
+    .xs {
+      flex: 1;
+      display: inline-flex;
+      flex-direction: column;
+      background-color: black;
+      .col {
+        margin: 0;
+        padding: 0;
+      }
+      &:last-of-type {
+        border: none;
+      }
+      input, select, button {
+        background-color: black !important;
+        text-align: center;
+        color: $waterhole;
+      }
+      select {
+        background-color: $cranberry important;
+      }
+      label {
+        text-align: center;
+        width: 100%;
+        transform: translateY(-50%);
+        top: 50%;
+        position: absolute;
+        color: $asbestos;
+        font-size: 1.5rem;
+      }
+      div {
+        flex: 1;
+        position: relative;
+        &.duplicates-allowed, &.poll-expiry {
+          display: inline-flex;
+          flex-direction: row;
+        }
+      }
+
+    }
+  }
+  .create-container {
+    flex: 1;
+    border-top: solid 1px $amber;
+  }
+}
 #modal {
 
   button {
@@ -407,10 +425,11 @@ header {
       font-size: 1rem !important;
     }
   }
+  .xs {
+    label {
+      font-size: 1rem !important;
+      color: $asbestos;
+    }
+  }
 }
 
-[data-light='light-off'] {
-  background-color: black !important;
-  color: white !important;
-  border: none;
-}

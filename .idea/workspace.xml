@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9e143689-5bf1-4fdf-8223-c6d4d71cedf2" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/components/bar_visualizer.es6.jsx" afterPath="$PROJECT_DIR$/app/assets/javascripts/components/bar_visualizer.es6.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/components/main.es6.jsx" afterPath="$PROJECT_DIR$/app/assets/javascripts/components/main.es6.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/components/main_menu.es6.jsx" afterPath="$PROJECT_DIR$/app/assets/javascripts/components/main_menu.es6.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/components/modal.es6.jsx" afterPath="$PROJECT_DIR$/app/assets/javascripts/components/modal.es6.jsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/application.scss" />
     </list>
     <ignored path=".idea/dataSources.local.xml" />
@@ -48,8 +44,8 @@
       <file leaf-file-name="application.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="398" column="0" lean-forward="false" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
+            <state relative-caret-position="500">
+              <caret line="358" column="35" lean-forward="false" selection-start-line="358" selection-start-column="35" selection-end-line="358" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -695,12 +691,12 @@
       <workItem from="1499299325980" duration="718000" />
       <workItem from="1501543449486" duration="524000" />
       <workItem from="1504130956187" duration="620000" />
-      <workItem from="1504641151255" duration="2292000" />
+      <workItem from="1504641151255" duration="2983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150348000" />
+    <option name="totallyTimeSpent" value="151039000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="64" y="-11" width="1857" height="1092" extended-state="6" />
@@ -1080,8 +1076,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/application.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="398" column="0" lean-forward="false" selection-start-line="398" selection-start-column="0" selection-end-line="398" selection-end-column="0" />
+        <state relative-caret-position="500">
+          <caret line="358" column="35" lean-forward="false" selection-start-line="358" selection-start-column="35" selection-end-line="358" selection-end-column="35" />
           <folding />
         </state>
       </provider>

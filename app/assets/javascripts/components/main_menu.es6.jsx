@@ -14,18 +14,11 @@ class MainMenu extends React.Component {
 
   render () {
       return(
-          <header data-light={this.props.lightClass()} className="fixed-top">
+          <header className="fixed-top">
               <div className="navbar">
                 <h1>Strawpoll
                     <span className="text-muted">Create and share here</span>
                     <span className="text-muted smiles">:)</span>
-                    <button
-                        type="button"
-                        onClick={this.props.toggleLightSwitch.bind(null)}
-                        id="light-switch"
-                        className={this.props.lightClass()}>
-                        <i className="fa fa-lightbulb-o"></i>
-                    </button>
                 </h1>
               </div>
           </header>

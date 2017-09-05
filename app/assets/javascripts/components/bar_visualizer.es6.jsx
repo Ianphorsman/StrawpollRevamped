@@ -48,7 +48,7 @@ class BarVisualizer extends React.Component {
                           {this.props.pollData.options.map(this.renderBarFor.bind(this))}
                       </ul>
                   </div>
-                  <div data-light={this.props.lightClass()} id="card-footer" className="card-footer flex-row">
+                  <div id="card-footer" className="card-footer flex-row">
                       <div className="xs">
                           <p>{this.props.voteCount}</p>
                           <label className="text-muted">Votes Cast</label>

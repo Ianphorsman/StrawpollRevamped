@@ -172,7 +172,7 @@ h1, h3 {
 }
 
 header {
-  background-color: #f8f8f8;
+  background-color: black;
   border-bottom: solid 1px transparentize($amber, 0.5);
   .navbar {
     height: 4rem;
@@ -272,26 +272,6 @@ header {
   background-color: $waterhole;
 }
 
-#light-switch {
-  background-color: transparent;
-  font-size: 1.5rem;
-  right: 0;
-  position: absolute;
-  line-height: 1.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  vertical-align: baseline;
-
-  &.light-on {
-    text-shadow: 0 0 10px lighten($amber, 10%);
-    color: $amber;
-    transition: text-shadow .2s, color .2s;
-  }
-  &.light-off {
-    color: $river;
-    transition: text-shadow .2s, color .2s;
-  }
-}
 #chart-container {
   text-align: center;
   #chart-legend {
@@ -354,7 +334,7 @@ header {
 }
 
 #card-footer {
-  background-color: #f8f8f8;
+  background-color: black;
   padding: 0;
 
   div {
@@ -397,9 +377,14 @@ header {
   }
   .modal-header {
     border-bottom: solid 1px $amber;
+    background-color: black;
   }
   .modal-footer {
     border-top: solid 1px $amber;
+    background-color: black;
+  }
+  .modal-body {
+    background-color: black;
   }
 }
 @media (max-width: 576px) {

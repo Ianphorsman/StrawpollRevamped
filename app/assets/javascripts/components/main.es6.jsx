@@ -5,7 +5,6 @@ class Main extends React.Component {
         super(props)
         this.state = {
             ...props,
-            light: this.getLightSwitchMode()
         }
     }
 
@@ -13,32 +12,6 @@ class Main extends React.Component {
         this.pollSubscription(this)
     }
 
-    getLightSwitchMode() {
-        const light = localStorage.getItem('strawpoll_light')
-        if (light === true || light === 'true') {
-            return true
-        } else if (light === false || light === 'false') {
-            return false
-        } else {
-            true
-        }
-    }
-
-    getLightSwitch() {
-        if (this.state.light) {
-            return 'light-on'
-        } else {
-            return 'light-off'
-        }
-    }
-
-    toggleLightSwitch() {
-        this.setState({
-            light: !this.state.light
-        }, function() {
-            localStorage.setItem('strawpoll_light', this.state.light)
-        })
-    }
 
     toggleModal() {
         this.setState({
@@ -300,9 +273,7 @@ class Main extends React.Component {
                     duplicateVotesAllowed={this.state.duplicateVotesAllowed}
                     totalVotes={this.state.totalVotes}
                     pollExpiresIn={this.state.pollExpiresIn}
-                    pollExpiryUnit={this.state.pollExpiryUnit}
-                    light={this.state.light}
-                    lightClass={this.getLightSwitch.bind(this)}>
+                    pollExpiryUnit={this.state.pollExpiryUnit}>
                 </NewPoll>
             )
         } else if (this.state.pollContext === 'showPoll') {
@@ -316,8 +287,6 @@ class Main extends React.Component {
                     userParticipated={this.state.userParticipated}
                     vote={this.vote.bind(this)}
                     shareLink={this.state.shareLink}
-                    light={this.state.light}
-                    lightClass={this.getLightSwitch.bind(this)}
                     toggleModal={this.toggleModal.bind(this)}
                     copyToClipboard={this.copyToClipboard.bind(this)}>
                 </Poll>
@@ -335,14 +304,9 @@ class Main extends React.Component {
                 getPoll={this.getPoll.bind(this)}
                 userPolls={this.state.userPolls}
                 popularPolls={this.state.popularPolls}
-                changeContext={this.changeContext.bind(this)}
-                toggleLightSwitch={this.toggleLightSwitch.bind(this)}
-                light={this.state.light}
-                lightClass={this.getLightSwitch.bind(this)}>
+                changeContext={this.changeContext.bind(this)}>
             </MainMenu>
             <Modal
-                light={this.state.light}
-                lightClass={this.getLightSwitch.bind(this)}
                 pollData={this.state.pollData}
                 userHasVoted={this.state.userHasVoted}
                 voteCount={this.state.voteCount}
